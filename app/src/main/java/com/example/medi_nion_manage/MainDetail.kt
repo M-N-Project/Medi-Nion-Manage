@@ -1,6 +1,7 @@
 package com.example.medi_nion_manage
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -46,39 +47,37 @@ class MainDetail : AppCompatActivity() {
         var id = intent.getStringExtra("id") //인증 요청한 유저의 아이디
         val identity = intent.getStringExtra("identity") //인증
         val image = intent.getStringExtra("image") //게시물 사진
-        val time = intent.getStringExtra("time") //인증 요청한 시간
 
         val id_textView = findViewById<TextView>(R.id.id_TextView)
         val identity_textView = findViewById<TextView>(R.id.identity_TextView)
-        val time_textView = findViewById<TextView>(R.id.time_TextView)
         val check_button = findViewById<Button>(R.id.check_Btn)
         val nocheck_button = findViewById<Button>(R.id.nocheck_Btn)
         val image_imageView = findViewById<ImageView>(R.id.image)
         image_imageView.visibility = View.VISIBLE
         val bitmap: Bitmap? = StringToBitmaps(image)
 
+        var intent = Intent(this, MainActivity::class.java)
+
         id_textView.setText(id) // 아이디
         identity_textView.setText(identity) // 신분증 text
-        time_textView.setText(time) // 시간
         image_imageView.setImageBitmap(bitmap) // opencv 이미지
 
         check_button.setOnClickListener {
-//            CheckRequest()
-            Toast.makeText(applicationContext, "check", Toast.LENGTH_SHORT).show()
+            CheckRequest()
+            Toast.makeText(applicationContext, "승인되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
         nocheck_button.setOnClickListener {
-//            CheckRequest()
-            Toast.makeText(applicationContext, "no check", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "반려되었습니다.", Toast.LENGTH_SHORT).show()
+            startActivity(intent)
         }
     }
 
     fun CheckRequest() {
-        val url = "http://seonho.dothome.co.kr/Heart_list.php"
+        val url = "http://seonho.dothome.co.kr/Check_Identity.php"
 
         var id = intent?.getStringExtra("id").toString() //요청한 사람의 아이디
         var identity = intent?.getStringExtra("identity").toString() //요청한 사람의 민증 번호
-        var time = intent?.getStringExtra("time").toString() //요청한 시간
         var image = intent?.getStringExtra("image").toString() //opencv 사진
         var identity_check = "false"
 
@@ -88,15 +87,15 @@ class MainDetail : AppCompatActivity() {
             Request.Method.POST,
             url,
             { response ->
-                if (response != "no Check") {
+                if (response != "check success") {
                     val jsonArray = JSONArray(response)
 
                     for (i in 0 until jsonArray.length()) {
 
                         val item = jsonArray.getJSONObject(i)
 
-                        val id = item.getString("id")
-                        var identity_check = item.getString("identity_check")
+                        id = item.getString("id")
+                        identity_check = item.getString("identity_check")
 
                         Log.d("IDENTITY", "$id, $identity_check")
                     }
@@ -111,7 +110,6 @@ class MainDetail : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         queue.add(request)
     }
-
 
     // 이미지 : String -> Bitmap 변환 =====================================================================================================
     fun StringToBitmaps(image: String?): Bitmap? {
