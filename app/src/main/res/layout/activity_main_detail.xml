@@ -3,20 +3,19 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<!--<ScrollView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical">-->
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -31,22 +30,52 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UserID: "
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/id_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="id"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
-                android:id="@+id/id_TextView"
+                android:id="@+id/identity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="id"
+                android:layout_marginTop="15dp"
+                android:text="User identity: "
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/identity_TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:text="identity"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
 
 
         </LinearLayout>
@@ -56,7 +85,7 @@
             android:id="@+id/linearLayout2"
             android:layout_width="372dp"
             android:layout_height="384dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="50dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +94,7 @@
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 app:srcCompat="@drawable/logo" />
 
         </LinearLayout>
@@ -74,6 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -82,9 +113,8 @@
                 android:id="@+id/check_Btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="30dp"
                 android:layout_marginStart="40dp"
+                android:layout_marginEnd="30dp"
                 android:text="승인"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +125,6 @@
                 android:id="@+id/nocheck_Btn"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:layout_marginEnd="5dp"
                 android:text="반려"
                 android:textColor="@color/white"
@@ -104,5 +133,5 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+<!--</ScrollView>-->
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

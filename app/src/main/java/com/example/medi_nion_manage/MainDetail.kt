@@ -2,6 +2,8 @@ package com.example.medi_nion_manage
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -13,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main_item.view.*
 import org.json.JSONArray
+
 
 class MainDetail : AppCompatActivity() {
 
@@ -54,13 +56,15 @@ class MainDetail : AppCompatActivity() {
         val nocheck_button = findViewById<Button>(R.id.nocheck_Btn)
         val image_imageView = findViewById<ImageView>(R.id.image)
         image_imageView.visibility = View.VISIBLE
-        val bitmap: Bitmap? = StringToBitmaps(image)
+        var bitmap: Bitmap? = StringToBitmaps(image)
+        bitmap = bitmap?.let { resize(it) }
 
         var intent = Intent(this, MainActivity::class.java)
 
         id_textView.setText(id) // 아이디
         identity_textView.setText(identity) // 신분증 text
         image_imageView.setImageBitmap(bitmap) // opencv 이미지
+
 
         check_button.setOnClickListener {
             CheckRequest()
@@ -72,6 +76,7 @@ class MainDetail : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 
     fun CheckRequest() {
         val url = "http://seonho.dothome.co.kr/Check_Identity.php"
@@ -121,5 +126,16 @@ class MainDetail : AppCompatActivity() {
             e.message
             return null
         }
+    }
+
+    private fun resize(bitmap: Bitmap): Bitmap? {
+        var bitmap: Bitmap? = bitmap
+        val config: Configuration = Resources.getSystem().configuration
+        var bitmap_width : Int? = bitmap?.width
+        var bitmap_height : Int? = bitmap?.height
+
+        bitmap = Bitmap.createScaledBitmap(bitmap!!, bitmap_width!! * 5, bitmap_height!! * 3, true)
+        Log.d("please", "$bitmap_height, $bitmap_width")
+        return bitmap
     }
 }

@@ -1,6 +1,9 @@
 package com.example.medi_nion_manage
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -148,7 +151,7 @@ class MainActivity : AppCompatActivity() {
                     val id = item.getString("id")
                     val identity = item.getString("identity")
                     val time = item.getString("time")
-                    val image = item.getString("image")
+                    val image = item.getString("identity_image")
 
                     val simpleTime = timeDiff(time)
 
@@ -181,7 +184,7 @@ class MainActivity : AppCompatActivity() {
 
                         val request = Main_Request (
                             Request.Method.POST,
-                            urlBoard,
+                            urlDetail,
                             { responseDetail ->
                                  val jsonArray = JSONArray(responseDetail)
                                 items.clear()
@@ -192,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                                     detailId = item.getString("id")
                                     detailIdentity = item.getString("identity")
                                     detailTime = item.getString("time")
-                                    detailImg= item.getString("image")
+                                    detailImg= item.getString("identity_image")
                                     Log.d("DETAIL", "$detailId, $detailIdentity")
 
                                     val intent = Intent(applicationContext, MainDetail::class.java)
@@ -268,6 +271,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         return msg
+    }
+
+    private fun resize(bitmap: Bitmap): Bitmap? {
+        var bitmap: Bitmap? = bitmap
+        val config: Configuration = Resources.getSystem().configuration
+        var bitmap_width : Int? = bitmap?.width
+        var bitmap_height : Int? = bitmap?.height
+
+        bitmap = Bitmap.createScaledBitmap(bitmap!!, 240, 480, true)
+        Log.d("please", "$bitmap_height, $bitmap_width")
+        return bitmap
     }
 }
 
