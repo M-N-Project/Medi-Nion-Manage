@@ -39,7 +39,7 @@
                     android:id="@+id/id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="UserID: "
+                    android:text="사용자 아이디: "
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="User identity: "
+                android:text="사용자 자격증 번호(학번): "
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
