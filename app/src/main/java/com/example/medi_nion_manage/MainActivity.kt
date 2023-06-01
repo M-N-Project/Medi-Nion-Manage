@@ -35,7 +35,7 @@ private var scrollFlag = false
 private var itemIndex = ArrayList<Int>()
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity: AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart() //프레그먼트로 생길 문제들은 추후에 생각하기,,
@@ -150,6 +150,8 @@ class MainActivity : AppCompatActivity() {
 
                     val id = item.getString("id")
                     val identity = item.getString("identity")
+                    val job = item.getString("userType")
+                    val dept = item.getString("userDept")
                     val time = item.getString("time")
                     val image = item.getString("identity_image")
 
@@ -175,6 +177,8 @@ class MainActivity : AppCompatActivity() {
 
                 var detailId : String = ""
                 var detailIdentity : String = ""
+                var detailJob: String = ""
+                var detailDept: String = ""
                 var detailTime : String = ""
                 var detailImg : String = ""
 
@@ -186,6 +190,7 @@ class MainActivity : AppCompatActivity() {
                             Request.Method.POST,
                             urlDetail,
                             { responseDetail ->
+
                                  val jsonArray = JSONArray(responseDetail)
                                 items.clear()
                                 for (i in jsonArray.length()-1  downTo  0) {
@@ -194,6 +199,8 @@ class MainActivity : AppCompatActivity() {
 
                                     detailId = item.getString("id")
                                     detailIdentity = item.getString("identity")
+                                    detailJob = item.getString("userType")
+                                    detailDept = item.getString("userDept")
                                     detailTime = item.getString("time")
                                     detailImg= item.getString("identity_image")
                                     Log.d("DETAIL", "$detailId, $detailIdentity")
@@ -202,6 +209,8 @@ class MainActivity : AppCompatActivity() {
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //인텐트 플래그 설정
                                     intent.putExtra("id", data.id)
                                     intent.putExtra("identity", data.identity)
+                                    intent.putExtra("userType", detailJob)
+                                    intent.putExtra("userDept", detailDept)
                                     intent.putExtra("time", data.time)
                                     intent.putExtra("image", data.image)
                                     startActivity(intent)

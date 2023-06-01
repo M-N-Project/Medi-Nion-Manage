@@ -48,10 +48,14 @@ class MainDetail : AppCompatActivity() {
         //MainActivity.kt에서 MainDetail.kt로 데이터 intent
         var id = intent.getStringExtra("id") //인증 요청한 유저의 아이디
         val identity = intent.getStringExtra("identity") //인증
+        val userType = intent.getStringExtra("userType")
+        val userDept = intent.getStringExtra("userDept")
         val image = intent.getStringExtra("image") //게시물 사진
 
         val id_textView = findViewById<TextView>(R.id.id_TextView)
         val identity_textView = findViewById<TextView>(R.id.identity_TextView)
+        val userType_textView = findViewById<TextView>(R.id.job_TextView)
+        val userDept_textView = findViewById<TextView>(R.id.dept_TextView)
         val check_button = findViewById<Button>(R.id.check_Btn)
         val nocheck_button = findViewById<Button>(R.id.nocheck_Btn)
         val image_imageView = findViewById<ImageView>(R.id.image)
@@ -63,6 +67,8 @@ class MainDetail : AppCompatActivity() {
 
         id_textView.setText(id) // 아이디
         identity_textView.setText(identity) // 신분증 text
+        userType_textView.setText(userType)
+        userDept_textView.setText(userDept)
         image_imageView.setImageBitmap(bitmap) // opencv 이미지
 
 

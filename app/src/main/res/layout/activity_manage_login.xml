@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/manage_logo" />
 
     <EditText
         android:id="@+id/id"
@@ -80,9 +80,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/login_round_button"
-        android:backgroundTint="#8BE0C4"
+        android:backgroundTint="#86C9C6"
         android:text="로그인"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autologin" />
